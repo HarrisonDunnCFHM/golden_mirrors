@@ -43,6 +43,7 @@ public class TreasureHunter : MonoBehaviour
     public void StartMoving()
     {
         moveTarget = FindNextTarget();
+        if(moveTarget == null) { return; }
         levelStart = true;
         mirrorManager.DisableMirrorAdd();
     }
@@ -56,6 +57,7 @@ public class TreasureHunter : MonoBehaviour
 
     private void Footsteps()
     {
+        if (moveTarget == null) { return; }
         if (currentStepTimer > 0f)
         {
             currentStepTimer -= Time.deltaTime;
