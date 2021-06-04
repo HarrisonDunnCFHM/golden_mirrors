@@ -66,7 +66,10 @@ public class TreasureHunter : MonoBehaviour
         {
             currentStepTimer = stepFrequency;
             var clipIndex = UnityEngine.Random.Range(0, footsteps.Count);
-            AudioSource.PlayClipAtPoint(footsteps[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume());
+            if (audioManager != null)
+            {
+                AudioSource.PlayClipAtPoint(footsteps[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume());
+            }
         }
     }
 
@@ -163,7 +166,10 @@ public class TreasureHunter : MonoBehaviour
             myAnimator.SetBool("Win", true);
             levelManager.WinLevel();
             var clipIndex = UnityEngine.Random.Range(0, winGrunts.Count);
-            AudioSource.PlayClipAtPoint(winGrunts[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume() );
+            if (audioManager != null)
+            {
+                AudioSource.PlayClipAtPoint(winGrunts[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume());
+            }
         }
     }
 

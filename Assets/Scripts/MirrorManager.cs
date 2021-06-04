@@ -42,7 +42,10 @@ public class MirrorManager : MonoBehaviour
                 currentMirrors--;
                 mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
                 int clipToPlay = UnityEngine.Random.Range(0, removeMirror.Count);
-                AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, audioManager.GetFXVolume());
+                if (audioManager != null)
+                {
+                    AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, audioManager.GetFXVolume());
+                }
             }
         }
     }
