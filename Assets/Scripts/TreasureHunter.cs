@@ -18,6 +18,7 @@ public class TreasureHunter : MonoBehaviour
     LevelManager levelManager;
     MirrorManager mirrorManager;
     List<Vector2> directions;
+    [SerializeField] AudioManager audioManager;
 
 
     bool levelStart;
@@ -36,6 +37,7 @@ public class TreasureHunter : MonoBehaviour
         directions = new List<Vector2> { new Vector2(1f, 0f), new Vector2(0f, 1f), new Vector2(-1f, 0f), new Vector2(0f, -1f) };
         myAnimator = GetComponent<Animator>();
         currentStepTimer = stepFrequency;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void StartMoving()
@@ -62,7 +64,7 @@ public class TreasureHunter : MonoBehaviour
         {
             currentStepTimer = stepFrequency;
             var clipIndex = UnityEngine.Random.Range(0, footsteps.Count);
-            AudioSource.PlayClipAtPoint(footsteps[clipIndex], Camera.main.transform.position, 1.0f);
+            AudioSource.PlayClipAtPoint(footsteps[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume());
         }
     }
 
@@ -159,7 +161,7 @@ public class TreasureHunter : MonoBehaviour
             myAnimator.SetBool("Win", true);
             levelManager.WinLevel();
             var clipIndex = UnityEngine.Random.Range(0, winGrunts.Count);
-            AudioSource.PlayClipAtPoint(winGrunts[clipIndex], Camera.main.transform.position, 1.0f);
+            AudioSource.PlayClipAtPoint(winGrunts[clipIndex], Camera.main.transform.position, audioManager.GetFXVolume() );
         }
     }
 
@@ -240,5 +242,10 @@ public class TreasureHunter : MonoBehaviour
         
         moveTarget = FindNextTarget();
     }
+
+    public bool isGameStarted()
+    {
+        return levelStart;
+    }    
  
 }

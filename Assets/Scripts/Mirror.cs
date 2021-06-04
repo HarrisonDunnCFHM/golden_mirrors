@@ -14,17 +14,17 @@ public class Mirror : MonoBehaviour
     [SerializeField] List<AudioClip> removeMirror;
 
     //cached refs
-    Animator myAnimator;
+    TreasureHunter treasureHunter;
     SpriteRenderer spriteRenderer;
     List<Vector2> directions;
+    AudioManager audioManager;
 
     private void Start()
     {
-        myAnimator = GetComponent<Animator>();
+        treasureHunter = FindObjectOfType<TreasureHunter>();
+        audioManager = FindObjectOfType<AudioManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         directions = new List<Vector2> { new Vector2(1f, 0f), new Vector2(0f, 1f), new Vector2(-1f, 0f), new Vector2(0f, -1f) };
-        
-
     }
 
     private void Update()
@@ -87,11 +87,12 @@ public class Mirror : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (treasureHunter.isGameStarted()) { return; }
         if (isPermanent) { return; }
         var mirrorManager = FindObjectOfType<MirrorManager>();
         mirrorManager.IncreaseMirrorCount();
         int clipToPlay = UnityEngine.Random.Range(0, removeMirror.Count);
-        AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, 1.0f);
+        AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, audioManager.GetFXVolume());
         Destroy(gameObject);
     }
 

@@ -17,9 +17,11 @@ public class MirrorManager : MonoBehaviour
 
     //cached refs
     TreasureHunter treasureHunter;
+    AudioManager audioManager;
 
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         treasureHunter = FindObjectOfType<TreasureHunter>();
         currentMirrors = maxMirrors;
         mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
@@ -40,7 +42,7 @@ public class MirrorManager : MonoBehaviour
                 currentMirrors--;
                 mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
                 int clipToPlay = UnityEngine.Random.Range(0, removeMirror.Count);
-                AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, 1.0f);
+                AudioSource.PlayClipAtPoint(removeMirror[clipToPlay], Camera.main.transform.position, audioManager.GetFXVolume());
             }
         }
     }
