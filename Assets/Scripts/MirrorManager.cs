@@ -24,7 +24,7 @@ public class MirrorManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         treasureHunter = FindObjectOfType<TreasureHunter>();
         currentMirrors = maxMirrors;
-        mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
+        mirrorCount.text = "Mirrors: " + currentMirrors.ToString();
     }
 
     public void DisableMirrorAdd()
@@ -40,7 +40,7 @@ public class MirrorManager : MonoBehaviour
             {
                 PlaceMirror(GetSquareClicked());
                 currentMirrors--;
-                mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
+                mirrorCount.text = "Mirrors: " + currentMirrors.ToString();
                 int clipToPlay = UnityEngine.Random.Range(0, removeMirror.Count);
                 if (audioManager != null)
                 {
@@ -58,7 +58,7 @@ public class MirrorManager : MonoBehaviour
    public void IncreaseMirrorCount()
     {
         currentMirrors++;
-        mirrorCount.text = "Mirrors:" + currentMirrors.ToString();
+        mirrorCount.text = "Mirrors: " + currentMirrors.ToString();
     }
 
     private Vector2 GetSquareClicked()

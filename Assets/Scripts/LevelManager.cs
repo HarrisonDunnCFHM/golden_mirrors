@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     //config params
     [SerializeField] GameObject winScreen;
+    [SerializeField] int targetFrameRate;
 
 
     //cached refs
@@ -15,6 +16,8 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //Time.captureFramerate = targetFrameRate;
+
     }
     public void WinLevel()
     {

@@ -76,12 +76,17 @@ public class TreasureHunter : MonoBehaviour
     private void MoveHunter()
     {
         if (moveTarget == null) { moveTarget = FindNextTarget(); }
+        //Debug.Log("Moving to " + moveTarget.name);
+        //if (lastTarget != null)
+        //{ Debug.Log("Last Target = " + lastTarget.name); }
+        //if (secondLastTarget != null)
+        //{ Debug.Log("Second Last Target = " + secondLastTarget.name); }
         var targetPos = moveTarget.transform.position;
         if (targetPos != transform.position)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * moveSpeed);
             TurnSprite(targetPos);
-            if (Mathf.Approximately(transform.position.x, targetPos.x) && Mathf.Approximately(transform.position.y, targetPos.y))
+            if (transform.position == moveTarget.transform.position)
             {
                 transform.position = targetPos;
                 if (transform.position == targetPos)
@@ -249,7 +254,7 @@ public class TreasureHunter : MonoBehaviour
 
     public void CheckForNewTargets()
     {
-        Debug.Log("It's an intersection");
+        //Debug.Log("It's an intersection");
         
         moveTarget = FindNextTarget();
     }

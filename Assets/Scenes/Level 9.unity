@@ -11735,6 +11735,10 @@ PrefabInstance:
       propertyPath: winScreen
       value: 
       objectReference: {fileID: 545922924}
+    - target: {fileID: 8467137772332392396, guid: a767cc04d7ab92b4ca0853f11f9c33e5, type: 3}
+      propertyPath: targetFrameRate
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8467137772332392397, guid: a767cc04d7ab92b4ca0853f11f9c33e5, type: 3}
       propertyPath: m_Name
       value: Level Manager
