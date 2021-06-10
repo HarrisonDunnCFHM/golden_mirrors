@@ -75,7 +75,7 @@ public class TreasureHunter : MonoBehaviour
 
     private void MoveHunter()
     {
-        if (moveTarget == null) { return; }
+        if (moveTarget == null) { moveTarget = FindNextTarget(); }
         var targetPos = moveTarget.transform.position;
         if (targetPos != transform.position)
         {
@@ -84,16 +84,19 @@ public class TreasureHunter : MonoBehaviour
             if (Mathf.Approximately(transform.position.x, targetPos.x) && Mathf.Approximately(transform.position.y, targetPos.y))
             {
                 transform.position = targetPos;
-                GoalCheck(moveTarget);
-                if (lastTarget != null)
+                if (transform.position == targetPos)
                 {
-                    secondLastTarget = lastTarget;
+                    GoalCheck(moveTarget);
+                    if (lastTarget != null)
+                    {
+                        secondLastTarget = lastTarget;
+                    }
+                    if (moveTarget != null)
+                    {
+                        lastTarget = moveTarget;
+                    }
+                    moveTarget = FindNextTarget();
                 }
-                if (moveTarget != null)
-                {
-                    lastTarget = moveTarget;
-                }
-                moveTarget = FindNextTarget();
             }
         }
     }
